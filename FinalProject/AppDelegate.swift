@@ -19,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationController = UINavigationController(rootViewController: mainViewController)
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = navigationController
+        
+//        let testviewController = FPChooseCollectionViewController()
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         return true
     }

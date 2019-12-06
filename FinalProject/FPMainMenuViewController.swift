@@ -8,14 +8,20 @@
 
 import UIKit
 
+protocol UpdateCardCollection {
+    func udpateCardCollection(newCardCollection: [ImageModel])
+}
+
 
 //  Главное меню игры, здесь выбираются основные параметры: количество карточек и коллекция (в будущем)
 //
-class FPMainMenuViewController: UIViewController {
+class FPMainMenuViewController: UIViewController, UpdateCardCollection {
 //  По умолчанию стоит 16 карточек для игры
     private var cardCount: Int = 16
 //  Коллекция карточек. сюда будет загружаться в дальнейшем коллекции из памяти
-    var cardCollection: [ImageModel] = []
+    var cardCollection16: [ImageModel] = []
+    var cardCollection36: [ImageModel] = []
+    var currentCardCollection: [ImageModel] = []
 //  Кнопка для запуска игры
     private  let gameButton: UIButton = {
         let button = UIButton()
@@ -45,6 +51,15 @@ class FPMainMenuViewController: UIViewController {
         button.setTitleColor(.black, for: .normal)
         button.addTarget(self, action: #selector(tapHardButton), for: .touchDown)
         button.backgroundColor = .blue
+        button.layer.cornerRadius = 15
+        return button
+    }()
+    
+    private let collectionButton: UIButton = {
+        let button = UIButton()
+        button.setTitleColor(.black, for: .normal)
+        button.addTarget(self, action: #selector(chooseCardCollection), for: .touchDown)
+        button.backgroundColor = .clear
         button.layer.cornerRadius = 15
         return button
     }()
@@ -86,6 +101,7 @@ class FPMainMenuViewController: UIViewController {
         mainImageView.frame = CGRect(x: width/6, y: height/8, width: widthGameButton, height: height/16*7)
         text.frame = CGRect(x: width/6, y: height/12*7, width: widthGameButton, height: heightButton/2)
         
+        collectionButton.frame = mainImageView.frame
     }
     
 //  добавляем кнопки и картинки на view
@@ -98,33 +114,58 @@ class FPMainMenuViewController: UIViewController {
         view.addSubview(hardLVLButton)
         view.addSubview(mainImageView)
         view.addSubview(text)
+        view.addSubview(collectionButton)
     }
   
 //    функция относится к кнопке и переключает количество карточек на нужное нам число
     @objc private func tapEasyButton() {
-        cardCount = 16
+        currentCardCollection = cardCollection16
     }
 //    функция относится к кнопке и переключает количество карточек на нужное нам число
     @objc private func tapHardButton() {
-        cardCount = 36
+        currentCardCollection = cardCollection36
     }
 //  функция относится к кнопке, запускающей игру. На данном этапе в ней формируется коллекция, настраиваются параметры для следующего viewController'a и загружается следующий экран
     @objc private func loadGame() {
-        makeCardCollection()
+//        makeCardCollection()
+        if currentCardCollection.count == 0 {
+            print("Коллекция пуста")
+        } 
         let gameMenu = FPGameMenuViewController()
-        gameMenu.cardCollection = cardCollection
+        gameMenu.cardCollection = currentCardCollection
         navigationController?.pushViewController(gameMenu, animated: true)
     }
+    
+    @objc private func chooseCardCollection() {
+        let collectionViewController = FPChooseCollectionViewController()
+        collectionViewController.changeCardCollection = self
+        navigationController?.pushViewController(collectionViewController, animated: true)
+    }
 // функция, создающая коллекцию. Т.к. по логике игры у нас четное количество карточек, то мы смело делим на 2 (игра по отысканию пар) и заполняем коллекцию карточками и их копиями
-    func makeCardCollection() {
-        cardCollection = []
-        let firstCardCount = Int(cardCount/2)
+    func makeCardCollection(collection: [ImageModel])-> [ImageModel]{
+        cardCount = collection.count
+        var newCollection = [ImageModel]()
         
-        for i in 0..<firstCardCount {
-            let name = String(i)
-            let card = ImageModel(name: name, image: UIImage(named: name)!)
-            cardCollection.append(card)
-            cardCollection.append(card)
+        for i in 0..<cardCount {
+            newCollection.append(collection[i])
+            newCollection.append(collection[i])
+        }
+        
+        return newCollection
+    }
+    
+    func udpateCardCollection(newCardCollection: [ImageModel]){
+        switch newCardCollection.count {
+        case 8:
+            do {
+                cardCollection16 = makeCardCollection(collection: newCardCollection)
+            }
+        case 18:
+            do {
+                cardCollection36 = makeCardCollection(collection: newCardCollection)
+            }
+        default:
+            print("Ошибка в количестве карточек")
         }
     }
 }

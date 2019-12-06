@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0730D1632397D8490021E9F8 /* FPImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0730D1622397D8490021E9F8 /* FPImageModel.swift */; };
+		0730D1652398E69E0021E9F8 /* FPChooseCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0730D1642398E69E0021E9F8 /* FPChooseCollectionViewController.swift */; };
 		0731128F238C600400593334 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0731128E238C600400593334 /* AppDelegate.swift */; };
 		07311291238C600400593334 /* FPMainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07311290238C600400593334 /* FPMainMenuViewController.swift */; };
 		07311296238C600700593334 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07311295238C600700593334 /* Assets.xcassets */; };
@@ -17,10 +18,14 @@
 		073112A5238E93D700593334 /* FPCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073112A4238E93D700593334 /* FPCardCell.swift */; };
 		073112A7238EAEBD00593334 /* FPCardCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073112A6238EAEBD00593334 /* FPCardCollectionViewFlowLayout.swift */; };
 		073112A9238EC17E00593334 /* FPCardCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073112A8238EC17E00593334 /* FPCardCollectionViewDelegate.swift */; };
+		073DAC552398F2BE00E053B6 /* FPChooseCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073DAC542398F2BE00E053B6 /* FPChooseCollectionDataSource.swift */; };
+		073DAC572398F3D200E053B6 /* FPChooseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073DAC562398F3D200E053B6 /* FPChooseCollectionViewCell.swift */; };
+		073DAC592398F99300E053B6 /* FPChooseCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073DAC582398F99300E053B6 /* FPChooseCollectionDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0730D1622397D8490021E9F8 /* FPImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPImageModel.swift; sourceTree = "<group>"; };
+		0730D1642398E69E0021E9F8 /* FPChooseCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPChooseCollectionViewController.swift; sourceTree = "<group>"; };
 		0731128B238C600400593334 /* FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0731128E238C600400593334 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		07311290238C600400593334 /* FPMainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPMainMenuViewController.swift; sourceTree = "<group>"; };
@@ -32,6 +37,9 @@
 		073112A4238E93D700593334 /* FPCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPCardCell.swift; sourceTree = "<group>"; };
 		073112A6238EAEBD00593334 /* FPCardCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPCardCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		073112A8238EC17E00593334 /* FPCardCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPCardCollectionViewDelegate.swift; sourceTree = "<group>"; };
+		073DAC542398F2BE00E053B6 /* FPChooseCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPChooseCollectionDataSource.swift; sourceTree = "<group>"; };
+		073DAC562398F3D200E053B6 /* FPChooseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPChooseCollectionViewCell.swift; sourceTree = "<group>"; };
+		073DAC582398F99300E053B6 /* FPChooseCollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPChooseCollectionDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +76,10 @@
 				0730D1622397D8490021E9F8 /* FPImageModel.swift */,
 				07311290238C600400593334 /* FPMainMenuViewController.swift */,
 				073112A0238E904500593334 /* FPGameMenuViewController.swift */,
+				0730D1642398E69E0021E9F8 /* FPChooseCollectionViewController.swift */,
+				073DAC582398F99300E053B6 /* FPChooseCollectionDelegate.swift */,
+				073DAC542398F2BE00E053B6 /* FPChooseCollectionDataSource.swift */,
+				073DAC562398F3D200E053B6 /* FPChooseCollectionViewCell.swift */,
 				073112A2238E92A500593334 /* FPCardsCollectionViewDataSource.swift */,
 				073112A8238EC17E00593334 /* FPCardCollectionViewDelegate.swift */,
 				073112A6238EAEBD00593334 /* FPCardCollectionViewFlowLayout.swift */,
@@ -151,8 +163,12 @@
 			files = (
 				073112A3238E92A600593334 /* FPCardsCollectionViewDataSource.swift in Sources */,
 				073112A1238E904500593334 /* FPGameMenuViewController.swift in Sources */,
+				073DAC592398F99300E053B6 /* FPChooseCollectionDelegate.swift in Sources */,
 				073112A5238E93D700593334 /* FPCardCell.swift in Sources */,
+				073DAC552398F2BE00E053B6 /* FPChooseCollectionDataSource.swift in Sources */,
+				073DAC572398F3D200E053B6 /* FPChooseCollectionViewCell.swift in Sources */,
 				07311291238C600400593334 /* FPMainMenuViewController.swift in Sources */,
+				0730D1652398E69E0021E9F8 /* FPChooseCollectionViewController.swift in Sources */,
 				073112A9238EC17E00593334 /* FPCardCollectionViewDelegate.swift in Sources */,
 				073112A7238EAEBD00593334 /* FPCardCollectionViewFlowLayout.swift in Sources */,
 				0731128F238C600400593334 /* AppDelegate.swift in Sources */,
