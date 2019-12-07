@@ -34,8 +34,8 @@ class FPCardCell: UICollectionViewCell {
         
         if textLabel.text == "" {
             cardImageView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
-            cardImageView.image = UIImage(named: "18")
-            cardShit = cardImageView.image!
+//            cardImageView.image = UIImage(named: "18")
+//            cardShit = cardImageView.image!
             contentView.addSubview(cardImageView)
         } else {
             cardImageView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height * 7/8)
@@ -57,6 +57,14 @@ class FPCardCell: UICollectionViewCell {
         cardImage = cardShit
         cardShit = changeImage
         cardImageView.image = changeImage
+    }
+    
+    override func prepareForReuse() {
+        textLabel.text = ""
+        cardShit = UIImage()
+        cardImage = UIImage()
+        cardImageView.image = UIImage()
+        
     }
 
 }

@@ -16,12 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let mainViewController = FPMainMenuViewController()
+//        let mainViewController = FPAddCollectionVIewControllerCollectionViewController()
         let navigationController = UINavigationController(rootViewController: mainViewController)
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = navigationController
         
 //        let testviewController = FPChooseCollectionViewController()
-        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         return true
     }

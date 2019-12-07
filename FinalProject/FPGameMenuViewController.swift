@@ -102,7 +102,9 @@ class FPGameMenuViewController: UIViewController, UpdateGamePoints {
             
             if pointsGamer1 < pointsGamer2 {
                 textGameOver.text = "Игра закончена!\nПобедил игрок \(String(textGamer2.text))"
-            } else {
+            }
+            
+            if pointsGamer1 == pointsGamer2{
                 textGameOver.text = "Игра закончена!\nНичья"
             }
             

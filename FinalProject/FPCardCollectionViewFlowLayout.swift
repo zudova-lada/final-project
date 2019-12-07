@@ -31,17 +31,34 @@ class FPCardCollectionViewFlowLayout: UICollectionViewFlowLayout {
     }
     
     override func prepare() {
-        let cardCount = collectionView!.numberOfItems(inSection: 0)
+        var cardCount = collectionView!.numberOfItems(inSection: 0)
+        layoutAttributes = []
         
 //        !!!!!!!!!! определим количество столбцов !!!! т.к. у нас можно извлечь целый квадратный корень, то ячейки не сместятся, но если играть с количеством, некоторые ячейки могут пропасть из видимого экрана
-        numberOfColumns = Int(sqrt(Double(cardCount)))
-        // данных в layoutAttributes нет
-        guard
-            layoutAttributes.isEmpty == true,
-            let collectionView = collectionView
-            else {
-                return
+        
+        guard  let collectionView = collectionView else {
+            return
         }
+        
+        switch cardCount {
+        case 8:
+            cardCount = 16
+        case 18:
+            cardCount = 36
+
+        default:
+            true
+        }
+        numberOfColumns = Int(sqrt(Double(cardCount)))
+
+        
+        // данных в layoutAttributes нет
+//        guard
+//            layoutAttributes.isEmpty == true,
+//            let collectionView = collectionView
+//            else {
+//                return
+//        }
         
         // Задаем значения ширины и отступов
         let columnWidth = contentWidth / CGFloat(numberOfColumns)

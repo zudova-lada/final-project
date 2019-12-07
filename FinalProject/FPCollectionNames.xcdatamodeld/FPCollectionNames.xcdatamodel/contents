@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14492.1" systemVersion="18G103" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CollectionHelper" representedClassName="CollectionHelper" syncable="YES">
+        <attribute name="collectionName" attributeType="String" syncable="YES"/>
+        <attribute name="count" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="image1" attributeType="Binary" syncable="YES"/>
+        <attribute name="image2" attributeType="Binary" syncable="YES"/>
+        <attribute name="image3" attributeType="Binary" syncable="YES"/>
+        <attribute name="image4" attributeType="Binary" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="CollectionHelper" positionX="-54" positionY="-9" width="128" height="135"/>
+    </elements>
+</model>

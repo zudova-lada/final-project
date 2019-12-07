@@ -10,7 +10,7 @@ import UIKit
 
 class FPChooseCollectionDataSource: NSObject, UICollectionViewDataSource {
 
-    var cardCollection: [[ImageModel]]!
+    var cardCollection: [CollectionHelper]!
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return cardCollection.count
@@ -18,14 +18,17 @@ class FPChooseCollectionDataSource: NSObject, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionCell", for: indexPath) as! FPChooseCollectionViewCell
+        let item = cardCollection[indexPath.row]
         
-        let imageModel = cardCollection[indexPath.row]
+        DispatchQueue.main.async {
 
-        cell.cardImageView1.image = imageModel.randomElement()?.image
-        cell.cardImageView2.image = imageModel.randomElement()?.image
-        cell.cardImageView3.image = imageModel.randomElement()?.image
-        cell.cardShirtImageView.image = imageModel.randomElement()?.image
-        
+            cell.cardImageView1.image = UIImage(data: item.image1 as Data, scale: 0.01)
+            cell.cardImageView2.image = UIImage(data: item.image2 as Data, scale: 0.01)
+            cell.cardImageView3.image = UIImage(data: item.image3 as Data, scale: 0.01)
+            cell.cardShirtImageView.image = UIImage(data: item.image4 as Data, scale: 0.01)
+            
+        }
+
         return cell
     }
 }

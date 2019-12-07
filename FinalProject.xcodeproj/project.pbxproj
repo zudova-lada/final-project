@@ -18,9 +18,19 @@
 		073112A5238E93D700593334 /* FPCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073112A4238E93D700593334 /* FPCardCell.swift */; };
 		073112A7238EAEBD00593334 /* FPCardCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073112A6238EAEBD00593334 /* FPCardCollectionViewFlowLayout.swift */; };
 		073112A9238EC17E00593334 /* FPCardCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073112A8238EC17E00593334 /* FPCardCollectionViewDelegate.swift */; };
+		0734809D239ADD3400533A4B /* CollectionHelper+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0734809B239ADD3400533A4B /* CollectionHelper+CoreDataClass.swift */; };
+		0734809E239ADD3400533A4B /* CollectionHelper+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0734809C239ADD3400533A4B /* CollectionHelper+CoreDataProperties.swift */; };
 		073DAC552398F2BE00E053B6 /* FPChooseCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073DAC542398F2BE00E053B6 /* FPChooseCollectionDataSource.swift */; };
 		073DAC572398F3D200E053B6 /* FPChooseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073DAC562398F3D200E053B6 /* FPChooseCollectionViewCell.swift */; };
 		073DAC592398F99300E053B6 /* FPChooseCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073DAC582398F99300E053B6 /* FPChooseCollectionDelegate.swift */; };
+		073DAC5D239A3CF300E053B6 /* FPAddCollectionVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073DAC5C239A3CF300E053B6 /* FPAddCollectionVIewController.swift */; };
+		073DAC5F239A5B6000E053B6 /* FPAddCardDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073DAC5E239A5B6000E053B6 /* FPAddCardDataSource.swift */; };
+		073DAC63239A82A600E053B6 /* FPCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073DAC62239A82A600E053B6 /* FPCoreDataManager.swift */; };
+		073DAC66239A869A00E053B6 /* FPCardCollection.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 073DAC64239A869A00E053B6 /* FPCardCollection.xcdatamodeld */; };
+		073DAC69239A8C7800E053B6 /* ImageStructure+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073DAC67239A8C7800E053B6 /* ImageStructure+CoreDataClass.swift */; };
+		073DAC6A239A8C7800E053B6 /* ImageStructure+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073DAC68239A8C7800E053B6 /* ImageStructure+CoreDataProperties.swift */; };
+		073DAC6F239ACDF400E053B6 /* FPCollectionNames.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 073DAC6D239ACDF400E053B6 /* FPCollectionNames.xcdatamodeld */; };
+		073DAC75239ACEDE00E053B6 /* FPCoreDataNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073DAC74239ACEDE00E053B6 /* FPCoreDataNames.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,9 +47,19 @@
 		073112A4238E93D700593334 /* FPCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPCardCell.swift; sourceTree = "<group>"; };
 		073112A6238EAEBD00593334 /* FPCardCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPCardCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		073112A8238EC17E00593334 /* FPCardCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPCardCollectionViewDelegate.swift; sourceTree = "<group>"; };
+		0734809B239ADD3400533A4B /* CollectionHelper+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionHelper+CoreDataClass.swift"; sourceTree = "<group>"; };
+		0734809C239ADD3400533A4B /* CollectionHelper+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionHelper+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		073DAC542398F2BE00E053B6 /* FPChooseCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPChooseCollectionDataSource.swift; sourceTree = "<group>"; };
 		073DAC562398F3D200E053B6 /* FPChooseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPChooseCollectionViewCell.swift; sourceTree = "<group>"; };
 		073DAC582398F99300E053B6 /* FPChooseCollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPChooseCollectionDelegate.swift; sourceTree = "<group>"; };
+		073DAC5C239A3CF300E053B6 /* FPAddCollectionVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPAddCollectionVIewController.swift; sourceTree = "<group>"; };
+		073DAC5E239A5B6000E053B6 /* FPAddCardDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPAddCardDataSource.swift; sourceTree = "<group>"; };
+		073DAC62239A82A600E053B6 /* FPCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPCoreDataManager.swift; sourceTree = "<group>"; };
+		073DAC65239A869A00E053B6 /* FPCardCollection.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FPCardCollection.xcdatamodel; sourceTree = "<group>"; };
+		073DAC67239A8C7800E053B6 /* ImageStructure+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageStructure+CoreDataClass.swift"; sourceTree = "<group>"; };
+		073DAC68239A8C7800E053B6 /* ImageStructure+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageStructure+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		073DAC6E239ACDF400E053B6 /* FPCollectionNames.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FPCollectionNames.xcdatamodel; sourceTree = "<group>"; };
+		073DAC74239ACEDE00E053B6 /* FPCoreDataNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPCoreDataNames.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +76,10 @@
 		07311282238C600400593334 = {
 			isa = PBXGroup;
 			children = (
+				0734809B239ADD3400533A4B /* CollectionHelper+CoreDataClass.swift */,
+				0734809C239ADD3400533A4B /* CollectionHelper+CoreDataProperties.swift */,
+				073DAC67239A8C7800E053B6 /* ImageStructure+CoreDataClass.swift */,
+				073DAC68239A8C7800E053B6 /* ImageStructure+CoreDataProperties.swift */,
 				0731128D238C600400593334 /* FinalProject */,
 				0731128C238C600400593334 /* Products */,
 			);
@@ -72,21 +96,27 @@
 		0731128D238C600400593334 /* FinalProject */ = {
 			isa = PBXGroup;
 			children = (
+				073DAC62239A82A600E053B6 /* FPCoreDataManager.swift */,
+				073DAC74239ACEDE00E053B6 /* FPCoreDataNames.swift */,
 				0731128E238C600400593334 /* AppDelegate.swift */,
-				0730D1622397D8490021E9F8 /* FPImageModel.swift */,
 				07311290238C600400593334 /* FPMainMenuViewController.swift */,
+				0730D1622397D8490021E9F8 /* FPImageModel.swift */,
 				073112A0238E904500593334 /* FPGameMenuViewController.swift */,
 				0730D1642398E69E0021E9F8 /* FPChooseCollectionViewController.swift */,
 				073DAC582398F99300E053B6 /* FPChooseCollectionDelegate.swift */,
+				073DAC5C239A3CF300E053B6 /* FPAddCollectionVIewController.swift */,
 				073DAC542398F2BE00E053B6 /* FPChooseCollectionDataSource.swift */,
 				073DAC562398F3D200E053B6 /* FPChooseCollectionViewCell.swift */,
 				073112A2238E92A500593334 /* FPCardsCollectionViewDataSource.swift */,
 				073112A8238EC17E00593334 /* FPCardCollectionViewDelegate.swift */,
+				073DAC5E239A5B6000E053B6 /* FPAddCardDataSource.swift */,
 				073112A6238EAEBD00593334 /* FPCardCollectionViewFlowLayout.swift */,
 				073112A4238E93D700593334 /* FPCardCell.swift */,
 				07311295238C600700593334 /* Assets.xcassets */,
 				07311297238C600700593334 /* LaunchScreen.storyboard */,
 				0731129A238C600700593334 /* Info.plist */,
+				073DAC64239A869A00E053B6 /* FPCardCollection.xcdatamodeld */,
+				073DAC6D239ACDF400E053B6 /* FPCollectionNames.xcdatamodeld */,
 			);
 			path = FinalProject;
 			sourceTree = "<group>";
@@ -162,15 +192,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				073112A3238E92A600593334 /* FPCardsCollectionViewDataSource.swift in Sources */,
+				073DAC66239A869A00E053B6 /* FPCardCollection.xcdatamodeld in Sources */,
 				073112A1238E904500593334 /* FPGameMenuViewController.swift in Sources */,
 				073DAC592398F99300E053B6 /* FPChooseCollectionDelegate.swift in Sources */,
 				073112A5238E93D700593334 /* FPCardCell.swift in Sources */,
+				073DAC6A239A8C7800E053B6 /* ImageStructure+CoreDataProperties.swift in Sources */,
+				073DAC63239A82A600E053B6 /* FPCoreDataManager.swift in Sources */,
 				073DAC552398F2BE00E053B6 /* FPChooseCollectionDataSource.swift in Sources */,
 				073DAC572398F3D200E053B6 /* FPChooseCollectionViewCell.swift in Sources */,
 				07311291238C600400593334 /* FPMainMenuViewController.swift in Sources */,
+				0734809E239ADD3400533A4B /* CollectionHelper+CoreDataProperties.swift in Sources */,
 				0730D1652398E69E0021E9F8 /* FPChooseCollectionViewController.swift in Sources */,
+				073DAC5F239A5B6000E053B6 /* FPAddCardDataSource.swift in Sources */,
+				073DAC5D239A3CF300E053B6 /* FPAddCollectionVIewController.swift in Sources */,
+				073DAC75239ACEDE00E053B6 /* FPCoreDataNames.swift in Sources */,
 				073112A9238EC17E00593334 /* FPCardCollectionViewDelegate.swift in Sources */,
 				073112A7238EAEBD00593334 /* FPCardCollectionViewFlowLayout.swift in Sources */,
+				073DAC69239A8C7800E053B6 /* ImageStructure+CoreDataClass.swift in Sources */,
+				0734809D239ADD3400533A4B /* CollectionHelper+CoreDataClass.swift in Sources */,
+				073DAC6F239ACDF400E053B6 /* FPCollectionNames.xcdatamodeld in Sources */,
 				0731128F238C600400593334 /* AppDelegate.swift in Sources */,
 				0730D1632397D8490021E9F8 /* FPImageModel.swift in Sources */,
 			);
@@ -364,6 +404,29 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		073DAC64239A869A00E053B6 /* FPCardCollection.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				073DAC65239A869A00E053B6 /* FPCardCollection.xcdatamodel */,
+			);
+			currentVersion = 073DAC65239A869A00E053B6 /* FPCardCollection.xcdatamodel */;
+			path = FPCardCollection.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		073DAC6D239ACDF400E053B6 /* FPCollectionNames.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				073DAC6E239ACDF400E053B6 /* FPCollectionNames.xcdatamodel */,
+			);
+			currentVersion = 073DAC6E239ACDF400E053B6 /* FPCollectionNames.xcdatamodel */;
+			path = FPCollectionNames.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 07311283238C600400593334 /* Project object */;
 }
