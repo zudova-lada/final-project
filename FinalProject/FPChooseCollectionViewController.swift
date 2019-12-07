@@ -97,7 +97,7 @@ class FPChooseCollectionViewController: UIViewController, AddNewCollection {
     
         
         DispatchQueue.global().async {
-            self.dataForView16 = self.namesCollections.fetchData36()
+            self.dataForView36 = self.namesCollections.fetchData36()
         }
         coreDataManager.createPersistentContainer()
 
@@ -190,27 +190,27 @@ class FPChooseCollectionViewController: UIViewController, AddNewCollection {
     
     func addCollection(newCollection:[ImageModel]) {
 
-            let collectionName = dataSource.cardCollection.count
+        let collectionName = dataSource.cardCollection.count
+        var images = [Data?]()
         
-        DispatchQueue.main.async {
-            var images = [Data?]()
+        for i in 0..<4 {
+            images.append(newCollection[i].image.pngData())
+        }
+        let savingName = CollectionHelper(context: self.namesCollections.context)
+        savingName.collectionName = String(collectionName)
+        savingName.image1 = NSData(data: images[0]!) as NSData
+        savingName.image2 = NSData(data: images[1]!) as NSData
+        savingName.image3 = NSData(data: images[2]!) as NSData
+        savingName.image4 = NSData(data: images[3]!) as NSData
+        savingName.count = String(newCollection.count)
+        
+        self.dataSource.cardCollection.append(savingName)
+        self.cardCollectionView.reloadData()
+        
+        DispatchQueue.global().async {
             
-            for i in 0..<4 {
-                images.append(newCollection[i].image.pngData())
-            }
-            
-            let savingName = CollectionHelper(context: self.namesCollections.context)
-            savingName.collectionName = String(collectionName)
-            savingName.image1 = NSData(data: images[0]!) as NSData
-            savingName.image2 = NSData(data: images[1]!) as NSData
-            savingName.image3 = NSData(data: images[2]!) as NSData
-            savingName.image4 = NSData(data: images[3]!) as NSData
-            savingName.count = Int16(newCollection.count)
-            
-            self.dataSource.cardCollection.append(savingName)
             self.namesCollections.saveContext()
             
-            self.cardCollectionView.reloadData()
         }
         
         DispatchQueue.global().async {

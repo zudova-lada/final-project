@@ -43,6 +43,8 @@ class FPCoreDataNames {
     }
     
     func deleteAllElements () {
+        request.predicate =  nil
+        
         do {
             collectionNames16 = try context.fetch(request)
             for data in collectionNames16 {
@@ -77,7 +79,7 @@ class FPCoreDataNames {
         print("Fetching Data..")
         
         do {
-            request.predicate = NSPredicate(format: "count == %d", Int16(16))
+            request.predicate = NSPredicate(format: "count == %@", "8")
             collectionNames16 = try context.fetch(request)
         } catch {
             print(error)
@@ -91,7 +93,7 @@ class FPCoreDataNames {
         
         do {
 
-            request.predicate = NSPredicate(format: "count == %d", Int16(36))
+            request.predicate = NSPredicate(format: "count == %@", "18")
             collectionNames36 = try context.fetch(request)
         } catch {
             print(error)
