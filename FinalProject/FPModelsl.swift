@@ -14,3 +14,9 @@ struct ImageModel {
     var name: String
     var image: UIImage
 }
+
+
+struct ImagesModel {
+    var name: String
+    var images: [UIImage]
+}

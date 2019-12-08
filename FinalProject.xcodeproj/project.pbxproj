@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0730D1632397D8490021E9F8 /* FPImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0730D1622397D8490021E9F8 /* FPImageModel.swift */; };
+		0730D1632397D8490021E9F8 /* FPModelsl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0730D1622397D8490021E9F8 /* FPModelsl.swift */; };
 		0730D1652398E69E0021E9F8 /* FPChooseCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0730D1642398E69E0021E9F8 /* FPChooseCollectionViewController.swift */; };
 		0731128F238C600400593334 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0731128E238C600400593334 /* AppDelegate.swift */; };
 		07311291238C600400593334 /* FPMainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07311290238C600400593334 /* FPMainMenuViewController.swift */; };
@@ -34,7 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0730D1622397D8490021E9F8 /* FPImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPImageModel.swift; sourceTree = "<group>"; };
+		0730D1622397D8490021E9F8 /* FPModelsl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPModelsl.swift; sourceTree = "<group>"; };
 		0730D1642398E69E0021E9F8 /* FPChooseCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPChooseCollectionViewController.swift; sourceTree = "<group>"; };
 		0731128B238C600400593334 /* FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0731128E238C600400593334 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -100,7 +100,7 @@
 				073DAC74239ACEDE00E053B6 /* FPCoreDataNames.swift */,
 				0731128E238C600400593334 /* AppDelegate.swift */,
 				07311290238C600400593334 /* FPMainMenuViewController.swift */,
-				0730D1622397D8490021E9F8 /* FPImageModel.swift */,
+				0730D1622397D8490021E9F8 /* FPModelsl.swift */,
 				073112A0238E904500593334 /* FPGameMenuViewController.swift */,
 				0730D1642398E69E0021E9F8 /* FPChooseCollectionViewController.swift */,
 				073DAC582398F99300E053B6 /* FPChooseCollectionDelegate.swift */,
@@ -212,7 +212,7 @@
 				0734809D239ADD3400533A4B /* CollectionHelper+CoreDataClass.swift in Sources */,
 				073DAC6F239ACDF400E053B6 /* FPCollectionNames.xcdatamodeld in Sources */,
 				0731128F238C600400593334 /* AppDelegate.swift in Sources */,
-				0730D1632397D8490021E9F8 /* FPImageModel.swift in Sources */,
+				0730D1632397D8490021E9F8 /* FPModelsl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

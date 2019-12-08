@@ -61,8 +61,6 @@ class FPAddCollectionVIewController: UIViewController {
         cardCollectionView.register(FPCardCell.self, forCellWithReuseIdentifier: "CardCell")
         dataSource.cardCollection = cardCollection
         cardCollectionView.dataSource = dataSource
-//        cardCollectionView.delegate = delegate
-//        cardCollectionView.isScrollEnabled = false
         
         cardCollectionView.frame = CGRect(x: 0, y: 2*(navigationController?.navigationBar.frame.height ?? 0), width: view.frame.width, height:view.frame.width + 6)
         cardCollectionView.backgroundColor = .blue

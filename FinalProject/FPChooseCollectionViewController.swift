@@ -24,8 +24,8 @@ class FPChooseCollectionViewController: UIViewController, AddNewCollection {
     private let dataSource = FPChooseCollectionDataSource()
     private let delegate = FPChooseCollectionDelegate()
     private let layout = UICollectionViewFlowLayout()
-    private var dataForView16 = [CollectionHelper]()
-    private var dataForView36 = [CollectionHelper]()
+    private var dataForView16 = [ImagesModel]()
+    private var dataForView36 = [ImagesModel]()
     
     let namesCollections = FPCoreDataNames()
     
@@ -87,20 +87,13 @@ class FPChooseCollectionViewController: UIViewController, AddNewCollection {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        функция, необходимая для настройки приложения,
-//        !!!!!!!не забыть удалить
-//        makeCardCollection()
-        
         namesCollections.createPersistentContainer()
         dataForView16 = namesCollections.fetchData16()
 //        namesCollections.deleteAllElements()
-    
-        
         DispatchQueue.global().async {
             self.dataForView36 = self.namesCollections.fetchData36()
         }
         coreDataManager.createPersistentContainer()
-
 //        coreDataManager.deleteAllElements()
         layout.itemSize = CGSize(width: view.frame.width, height: 700)
         layout.scrollDirection = .horizontal
@@ -144,6 +137,8 @@ class FPChooseCollectionViewController: UIViewController, AddNewCollection {
 
         cardCount = 16
         dataSource.cardCollection = dataForView16
+        easyLVLButton.backgroundColor = .gray
+        hardLVLButton.backgroundColor = .lightGray
         cardCollectionView.reloadData()
 
     }
@@ -152,20 +147,18 @@ class FPChooseCollectionViewController: UIViewController, AddNewCollection {
     @objc private func tapHardButton() {
         cardCount = 36
         dataSource.cardCollection = dataForView36
+        easyLVLButton.backgroundColor = .lightGray
+        hardLVLButton.backgroundColor = .gray
         cardCollectionView.reloadData()
     }
     
     
-    
-//    подправить под красивую логику
-//    !!!!!!!!!
-//    !!!!!!!!!!
-//    !!!!!!!
+
     @objc private func chooseCollectionButton() {
 
         let centerPoint = CGPoint(x: cardCollectionView.bounds.origin.x + cardCollectionView.bounds.size.width/2, y:  cardCollectionView.bounds.origin.y + cardCollectionView.bounds.size.height/2)
         if let centerIndexPath: IndexPath  = cardCollectionView.indexPathForItem(at: centerPoint) {
-            let name = dataSource.cardCollection[centerIndexPath.row].collectionName
+            let name = dataSource.cardCollection[centerIndexPath.row].name
             DispatchQueue.global().async {
                 let data = self.coreDataManager.fetchData(nameCollection: name, collectionCount: self.cardCount)
                 
@@ -190,24 +183,37 @@ class FPChooseCollectionViewController: UIViewController, AddNewCollection {
     
     func addCollection(newCollection:[ImageModel]) {
 
-        let collectionName = dataSource.cardCollection.count
-        var images = [Data?]()
+        let collectionName = String(dataSource.cardCollection.count) + String(newCollection.count)
+        var images = [UIImage]()
         
         for i in 0..<4 {
-            images.append(newCollection[i].image.pngData())
+            images.append(newCollection[i].image)
         }
-        let savingName = CollectionHelper(context: self.namesCollections.context)
-        savingName.collectionName = String(collectionName)
-        savingName.image1 = NSData(data: images[0]!) as NSData
-        savingName.image2 = NSData(data: images[1]!) as NSData
-        savingName.image3 = NSData(data: images[2]!) as NSData
-        savingName.image4 = NSData(data: images[3]!) as NSData
-        savingName.count = String(newCollection.count)
         
-        self.dataSource.cardCollection.append(savingName)
+        let model = ImagesModel(name: collectionName, images: images)
+        
+        self.dataSource.cardCollection.append(model)
         self.cardCollectionView.reloadData()
         
+        
+//        Нужно ли?
+        switch newCollection.count {
+        case 8:
+            dataForView16.append(model)
+        case 18:
+            dataForView36.append(model)
+        default: do {}
+        }
+
         DispatchQueue.global().async {
+            let savingName = CollectionHelper(context: self.namesCollections.context)
+            savingName.collectionName = collectionName
+            savingName.image1 = NSData(data: images[0].pngData()!) as NSData
+            savingName.image2 = NSData(data: images[1].pngData()!) as NSData
+            savingName.image3 = NSData(data: images[2].pngData()!) as NSData
+            savingName.image4 = NSData(data: images[3].pngData()!) as NSData
+            savingName.count = String(newCollection.count)
+            
             
             self.namesCollections.saveContext()
             
@@ -215,7 +221,7 @@ class FPChooseCollectionViewController: UIViewController, AddNewCollection {
         
         DispatchQueue.global().async {
 //            вот тут может быть ай-ай-ай
-            self.coreDataManager.saveContext(imageCollection: newCollection, collectionName: String(collectionName))
+            self.coreDataManager.saveContext(imageCollection: newCollection, collectionName: collectionName)
        
         }
     
@@ -223,16 +229,5 @@ class FPChooseCollectionViewController: UIViewController, AddNewCollection {
         
     }
     
-//    func makeCardCollection(){
-//
-//        let firstCardCount = Int(cardCount/2)
-//        var newCardCollection = [ImageModel]()
-//        for i in 0..<firstCardCount {
-//            let name = String(i)
-//            let card = ImageModel(name: name, image: UIImage(named: name)!)
-//            newCardCollection.append(card)
-//        }
-//
-//        cardCollection16.append(newCardCollection)
-//    }
+
 }

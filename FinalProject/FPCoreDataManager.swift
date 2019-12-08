@@ -74,7 +74,7 @@ class FPCoreDataManager {
         
         do {
             request.fetchLimit = collectionCount
-//            request.predicate = NSPredicate(format: "collectionName == %@", nameCollection)
+            request.predicate = NSPredicate(format: "collectionName == %@", nameCollection)
             lists = try context.fetch(request)
         } catch {
             print(error)

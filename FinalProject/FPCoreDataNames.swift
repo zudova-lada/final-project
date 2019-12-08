@@ -75,7 +75,7 @@ class FPCoreDataNames {
         }
     }
     
-    func fetchData16()-> [CollectionHelper]{
+    func fetchData16()-> [ImagesModel]{
         print("Fetching Data..")
         
         do {
@@ -85,10 +85,23 @@ class FPCoreDataNames {
             print(error)
         }
         
-        return collectionNames16
+        var imagesModel = [ImagesModel]()
+        
+        for item in collectionNames16 {
+            var imageArray = [UIImage]()
+            imageArray.append(UIImage(data: item.image1 as Data, scale: 0.01)!)
+            imageArray.append(UIImage(data: item.image2 as Data, scale: 0.01)!)
+            imageArray.append(UIImage(data: item.image3 as Data, scale: 0.01)!)
+            imageArray.append(UIImage(data: item.image4 as Data, scale: 0.01)!)
+            let image = ImagesModel(name: item.collectionName, images: imageArray)
+            imagesModel.append(image)
+            
+        }
+        
+        return imagesModel
     }
     
-    func fetchData36()-> [CollectionHelper]{
+    func fetchData36()-> [ImagesModel]{
         print("Fetching Data..")
         
         do {
@@ -99,6 +112,19 @@ class FPCoreDataNames {
             print(error)
         }
         
-        return collectionNames36
+        var imagesModel = [ImagesModel]()
+        
+        for item in collectionNames36 {
+            var imageArray = [UIImage]()
+            imageArray.append(UIImage(data: item.image1 as Data, scale: 0.01)!)
+            imageArray.append(UIImage(data: item.image2 as Data, scale: 0.01)!)
+            imageArray.append(UIImage(data: item.image3 as Data, scale: 0.01)!)
+            imageArray.append(UIImage(data: item.image4 as Data, scale: 0.01)!)
+            let image = ImagesModel(name: item.collectionName, images: imageArray)
+            imagesModel.append(image)
+
+        }
+        
+        return imagesModel
     }
 }

@@ -134,12 +134,14 @@ class FPMainMenuViewController: UIViewController, UpdateCardCollection {
         easyLVLButton.backgroundColor = .darkGray
         hardLVLButton.backgroundColor = .lightGray
         currentCardCollection = cardCollection16
+        mainImageView.image = currentCardCollection[0].image
     }
 //    функция относится к кнопке и переключает количество карточек на нужное нам число
     @objc private func tapHardButton() {
         easyLVLButton.backgroundColor = .lightGray
         hardLVLButton.backgroundColor = .darkGray
         currentCardCollection = cardCollection36
+        mainImageView.image = currentCardCollection[0].image
     }
 //  функция относится к кнопке, запускающей игру. На данном этапе в ней формируется коллекция, настраиваются параметры для следующего viewController'a и загружается следующий экран
     @objc private func loadGame() {
