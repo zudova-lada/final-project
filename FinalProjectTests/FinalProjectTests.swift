@@ -10,15 +10,15 @@ import XCTest
 import UIKit
 @testable import FinalProject
 
-//class MainMenuInputSpy: MainMenuInput {
-//
-//    var result = false
-//
-//    func errorMessage(errorMessage: String) {
-//        result = true
-//    }
-//
-//}
+class MainMenuInputSpy: MainMenuInput {
+
+    var result = false
+
+    func errorMessage(errorMessage: String) {
+        result = true
+    }
+
+}
 
 class ChooseCollectionSpy: ChooseCollectionInput {
     func updateDataSource(with model: ImagesModel) {
@@ -52,24 +52,16 @@ class FinalProjectTests: XCTestCase {
     }
 
     func test_WhereGameModelChamgeCardCount_MainMenuGetBadResult() {
-////         arrange
-//        let gameModel = GameModel()
-//        let mainMenu = MainMenuInputSpy()
-//        gameModel.mainMenu = mainMenu
-////         act
-//        gameModel.changeCardCount(cardCount: 18)
-////         assert
-//        XCTAssert(mainMenu.result, "Неверная обработка")
+//         arrange
+        let gameModel = GameModel()
+        let mainMenu = MainMenuInputSpy()
+        gameModel.mainMenu = mainMenu
+//         act
+        gameModel.changeCardCount(cardCount: 18)
+//         assert
+        XCTAssert(mainMenu.result, "Неверная обработка")
         
     }
-//    func test () {
-//        // arrange
-//        let gameModel = GameModel()
-//        // act
-//
-//        // assert
-//
-//    }
 
 
 }

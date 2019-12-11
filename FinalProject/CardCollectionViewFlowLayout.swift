@@ -52,8 +52,6 @@ final class CardCollectionViewFlowLayout: UICollectionViewFlowLayout {
             print("error")
         }
         
-        //        numberOfColumns = Int(sqrt(Double(cardCount)))
-        
         // Задаем значения ширины и отступов
         let columnWidth = contentWidth / CGFloat(numberOfColumns)
         var xOffset: [CGFloat] = []
