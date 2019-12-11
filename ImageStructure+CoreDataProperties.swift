@@ -12,13 +12,13 @@ import CoreData
 
 
 extension ImageStructure {
-
+    
     @nonobjc public class func fetchRequest() -> NSFetchRequest<ImageStructure> {
         return NSFetchRequest<ImageStructure>(entityName: "ImageStructure")
     }
-
+    
     @NSManaged public var image: NSData
     @NSManaged public var name: String
     @NSManaged public var collectionName: String
-
+    
 }

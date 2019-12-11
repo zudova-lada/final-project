@@ -1,5 +1,5 @@
 //
-//  FPAddCardDataSource.swift
+//  AddCardDataSource.swift
 //  FinalProject
 //
 //  Created by Лада on 06/12/2019.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FPAddCardDataSource: NSObject, UICollectionViewDataSource {
+final class AddCardDataSource: NSObject, UICollectionViewDataSource {
     
     var cardCollection: [ImageModel]!
     var collectionCount = 0
@@ -18,10 +18,10 @@ class FPAddCardDataSource: NSObject, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCell", for: indexPath) as! FPCardCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCell", for: indexPath) as! CardCell
         
         cell.cardImageView.image = cardCollection[indexPath.row].image
-        cell.textLabel.text = cardCollection[indexPath.row].name
+        //        cell.textLabel.text = cardCollection[indexPath.row].name
         if cardCollection[indexPath.row].name == ""{
             cell.backgroundColor = .clear
             cell.cardImageView.backgroundColor = .clear

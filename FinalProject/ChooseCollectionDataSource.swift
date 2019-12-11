@@ -1,5 +1,5 @@
 //
-//  FPChooseCollectionDataSource.swift
+//  ChooseCollectionDataSource.swift
 //  FinalProject
 //
 //  Created by Лада on 05/12/2019.
@@ -8,8 +8,8 @@
 
 import UIKit
 
-class FPChooseCollectionDataSource: NSObject, UICollectionViewDataSource {
-
+final class ChooseCollectionDataSource: NSObject, UICollectionViewDataSource {
+    
     var cardCollection: [ImagesModel]!
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -17,7 +17,7 @@ class FPChooseCollectionDataSource: NSObject, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionCell", for: indexPath) as! FPChooseCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionCell", for: indexPath) as! ChooseCollectionViewCell
         
         let imageModel = cardCollection[indexPath.row]
         
@@ -26,17 +26,6 @@ class FPChooseCollectionDataSource: NSObject, UICollectionViewDataSource {
         cell.cardImageView3.image = imageModel.images[2]
         cell.cardShirtImageView.image = imageModel.images[3]
         
-        
-        
-//        DispatchQueue.main.async {
-//
-//            cell.cardImageView1.image = UIImage(data: item.image1 as Data, scale: 0.01)
-//            cell.cardImageView2.image = UIImage(data: item.image2 as Data, scale: 0.01)
-//            cell.cardImageView3.image = UIImage(data: item.image3 as Data, scale: 0.01)
-//            cell.cardShirtImageView.image = UIImage(data: item.image4 as Data, scale: 0.01)
-//
-//        }
-
         return cell
     }
 }

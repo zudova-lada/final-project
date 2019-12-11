@@ -1,5 +1,5 @@
 //
-//  FPCardCollectionViewDelegate.swift
+//  CardCollectionViewDelegate.swift
 //  FinalProject
 //
 //  Created by Лада on 27/11/2019.
@@ -9,7 +9,7 @@
 import UIKit
 
 // считаем перевороты карт, если переворотов 2, то если имена карт одинаковые, они исчезают, а игроку добавляется очко и дается право повторного хода, если имена карт разные, то карты переворачиваются обратно, а право хода переходит к следующему игроку
-class FPCardCollectionViewDelegate: NSObject, UICollectionViewDelegate {
+class CardCollectionViewDelegate: NSObject, UICollectionViewDelegate {
     
     var gameMenuViewController: UpdateGamePoints!
     private var countRotation = 0
@@ -28,12 +28,12 @@ class FPCardCollectionViewDelegate: NSObject, UICollectionViewDelegate {
         }
         
         countRotation += 1
-        let cell = collectionView.cellForItem(at: indexPath) as! FPCardCell
+        let cell = collectionView.cellForItem(at: indexPath) as! CardCell
         cell.rotationCard()
         
         
         if  countRotation == 2 {
-            let cellTwo = collectionView.cellForItem(at: firstRotationPath!) as! FPCardCell
+            let cellTwo = collectionView.cellForItem(at: firstRotationPath!) as! CardCell
             
             if cell.textLabel.text == cellTwo.textLabel.text {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)){

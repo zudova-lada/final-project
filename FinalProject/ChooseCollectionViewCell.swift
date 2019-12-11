@@ -1,5 +1,5 @@
 //
-//  FPChooseCollectionViewCell.swift
+//  ChooseCollectionViewCell.swift
 //  FinalProject
 //
 //  Created by Лада on 05/12/2019.
@@ -8,15 +8,7 @@
 
 import UIKit
 
-class FPChooseCollectionViewCell: UICollectionViewCell {
-    
-    let textLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Hello"
-        label.textAlignment = .center
-        label.textColor = .black
-        return label
-    }()
+final class ChooseCollectionViewCell: UICollectionViewCell {
     
     let cardImageView1: UIImageView = {
         let imageView = UIImageView()
@@ -42,7 +34,7 @@ class FPChooseCollectionViewCell: UICollectionViewCell {
         imageView.image = UIImage()
         return imageView
     }()
-
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -51,7 +43,7 @@ class FPChooseCollectionViewCell: UICollectionViewCell {
         let width = frame.width
         let imageSize = CGSize(width: width/3, height: height/3)
         
-    
+        
         cardImageView1.frame = CGRect(origin: CGPoint(x: width/12*1, y: height/6), size: imageSize)
         cardImageView2.frame = CGRect(origin: CGPoint(x: width/12*3, y: height/6), size: imageSize)
         cardImageView3.frame = CGRect(origin: CGPoint(x: width/12*5, y: height/6), size: imageSize)

@@ -1,5 +1,5 @@
 //
-//  FPSecondMenuViewController.swift
+//  SecondMenuViewController.swift
 //  FinalProject
 //
 //  Created by Лада on 27/11/2019.
@@ -15,14 +15,14 @@ protocol UpdateGamePoints {
 // здесь идет сама игра
 // из предыдущего контроллера передается коллекция карточек
 // здесь ведется подсчет очков и изменяются параметры у вью
-class FPGameMenuViewController: UIViewController, UpdateGamePoints {
-
+final class GameMenuViewController: UIViewController, UpdateGamePoints {
+    
     var cardCollection: [ImageModel]!
     
     private var cardCollectionView: UICollectionView!
-    private let dataSource = FPCardsCollectionViewDataSource()
-    private let delegate = FPCardCollectionViewDelegate()
-    private let layout = FPCardCollectionViewFlowLayout()
+    private let dataSource = CardsCollectionViewDataSource()
+    private let delegate = CardCollectionViewDelegate()
+    private let layout = CardCollectionViewFlowLayout()
     //    параметры игры: очки первого игрока, второго игрока и количество оставшихся очков, по которым определяется, завершена ли игра
     private var pointsGamer1 = 0
     private var pointsGamer2 = 0
@@ -34,22 +34,20 @@ class FPGameMenuViewController: UIViewController, UpdateGamePoints {
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.itemSize = CGSize(width: view.frame.width, height: 700)
         cardCollectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height), collectionViewLayout: layout)
-        cardCollectionView.register(FPCardCell.self, forCellWithReuseIdentifier: "CardCell")
+        cardCollectionView.register(CardCell.self, forCellWithReuseIdentifier: "CardCell")
         dataSource.cardCollection = cardCollection
         cardCollectionView.dataSource = dataSource
         cardCollectionView.delegate = delegate
         cardCollectionView.isScrollEnabled = false
         
-//        !!!!!!!! как правильно узнать смещение по y вниз????
-//        на разных телефонах по-разному. я считала, что это высота navigationBar
         cardCollectionView.frame = CGRect(x: 0, y: 2*(navigationController?.navigationBar.frame.height ?? 0), width: view.frame.width, height:view.frame.width + 6)
         cardCollectionView.backgroundColor = .blue
         view.backgroundColor = UIColor.red
-//        устанавливаем количество очков, равных количеству карточек
+        //        устанавливаем количество очков, равных количеству карточек
         gameCount = cardCollection.count
         
         
-//        настраиваем расположение объектов
+        //        настраиваем расположение объектов
         let height = view.frame.height
         let width = view.frame.width
         
@@ -62,7 +60,7 @@ class FPGameMenuViewController: UIViewController, UpdateGamePoints {
         textPointGamer1.text = String(pointsGamer1)
         textPointGamer2.text = String(pointsGamer2)
     }
-//   добавляем наши объекты
+    //   добавляем наши объекты
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         view.backgroundColor = .blue
@@ -72,8 +70,8 @@ class FPGameMenuViewController: UIViewController, UpdateGamePoints {
         view.addSubview(textPointGamer1)
         view.addSubview(textPointGamer2)
     }
-//    функция, отвечающая за добавление очков игроку, чей номер передается в gamerNumber
-//    так же ведет подсчет количества оставшихся очков, удаляя по 2 очка при правильном ответе (неправильный ответ не передается)
+    //    функция, отвечающая за добавление очков игроку, чей номер передается в gamerNumber
+    //    так же ведет подсчет количества оставшихся очков, удаляя по 2 очка при правильном ответе (неправильный ответ не передается)
     func addPointsToGamer(gamerNumber: Int) {
         switch gamerNumber {
         case 1:
@@ -87,13 +85,13 @@ class FPGameMenuViewController: UIViewController, UpdateGamePoints {
                 self.pointsGamer2 += 1
                 self.textPointGamer2.text = String(self.pointsGamer2)
                 gameCount -= 2
-        }
+            }
             
         default:
             print("Такого игрока нет")
         }
-// когда количество карточек доходит до 0, тогда и количество очков становится 0
-// и появляется сообщение об окончании игры, а так же выдаются результаты игры
+        // когда количество карточек доходит до 0, тогда и количество очков становится 0
+        // и появляется сообщение об окончании игры, а так же выдаются результаты игры
         if gameCount == 0 {
             
             if pointsGamer1 > pointsGamer2 {

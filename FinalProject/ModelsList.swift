@@ -1,5 +1,5 @@
 //
-//  FPImageModel.swift
+//  ImageModel.swift
 //  FinalProject
 //
 //  Created by Лада on 04/12/2019.
@@ -15,8 +15,12 @@ struct ImageModel {
     var image: UIImage
 }
 
-
 struct ImagesModel {
     var name: String
     var images: [UIImage]
+}
+
+struct ImageNetworkModel {
+    let path: String
+    let description: String
 }

@@ -1,5 +1,5 @@
 //
-//  FPCardCollectionViewLayout.swift
+//  CardCollectionViewLayout.swift
 //  FinalProject
 //
 //  Created by Лада on 27/11/2019.
@@ -8,8 +8,8 @@
 
 import UIKit
 
-class FPCardCollectionViewFlowLayout: UICollectionViewFlowLayout {
-
+final class CardCollectionViewFlowLayout: UICollectionViewFlowLayout {
+    
     private var numberOfColumns = 0
     private let cellPadding: CGFloat = 1
     
@@ -34,7 +34,7 @@ class FPCardCollectionViewFlowLayout: UICollectionViewFlowLayout {
         var cardCount = collectionView!.numberOfItems(inSection: 0)
         layoutAttributes = []
         
-//        !!!!!!!!!! определим количество столбцов !!!! т.к. у нас можно извлечь целый квадратный корень, то ячейки не сместятся, но если играть с количеством, некоторые ячейки могут пропасть из видимого экрана
+        //        !!!!!!!!!! определим количество столбцов !!!! т.к. у нас можно извлечь целый квадратный корень, то ячейки не сместятся, но если играть с количеством, некоторые ячейки могут пропасть из видимого экрана
         
         guard  let collectionView = collectionView else {
             return
@@ -45,20 +45,10 @@ class FPCardCollectionViewFlowLayout: UICollectionViewFlowLayout {
             cardCount = 16
         case 18:
             cardCount = 36
-
         default:
-            true
+            print("Error")
         }
         numberOfColumns = Int(sqrt(Double(cardCount)))
-
-        
-        // данных в layoutAttributes нет
-//        guard
-//            layoutAttributes.isEmpty == true,
-//            let collectionView = collectionView
-//            else {
-//                return
-//        }
         
         // Задаем значения ширины и отступов
         let columnWidth = contentWidth / CGFloat(numberOfColumns)
@@ -92,7 +82,7 @@ class FPCardCollectionViewFlowLayout: UICollectionViewFlowLayout {
             
             column = column < (numberOfColumns - 1) ? (column + 1) : 0
         }
-
+        
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
@@ -109,5 +99,5 @@ class FPCardCollectionViewFlowLayout: UICollectionViewFlowLayout {
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         return layoutAttributes[indexPath.item]
     }
-
+    
 }

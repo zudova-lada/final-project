@@ -12,5 +12,5 @@ import CoreData
 
 @objc(CollectionHelper)
 public class CollectionHelper: NSManagedObject {
-
+    
 }

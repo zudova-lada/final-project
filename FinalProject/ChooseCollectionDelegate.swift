@@ -1,5 +1,5 @@
 //
-//  FPChooseCollectionDelegate.swift
+//  ChooseCollectionDelegate.swift
 //  FinalProject
 //
 //  Created by Лада on 05/12/2019.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FPChooseCollectionDelegate: NSObject, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
+final class ChooseCollectionDelegate: NSObject, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -34,7 +34,7 @@ class FPChooseCollectionDelegate: NSObject, UICollectionViewDelegateFlowLayout, 
     
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-      
+        
         let itemWidth = scrollView.contentSize.height
         
         let cellWidthIncludingSpacing = itemWidth + 5

@@ -12,5 +12,5 @@ import CoreData
 
 @objc(ImageStructure)
 public class ImageStructure: NSManagedObject {
-
+    
 }

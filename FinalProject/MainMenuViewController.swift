@@ -15,62 +15,43 @@ protocol UpdateCardCollection {
 
 //  Главное меню игры, здесь выбираются основные параметры: количество карточек и коллекция (в будущем)
 //
-class FPMainMenuViewController: UIViewController, UpdateCardCollection {
-//  По умолчанию стоит 16 карточек для игры
+final class MainMenuViewController: UIViewController, UpdateCardCollection {
+    //  По умолчанию стоит 16 карточек для игры
     private var cardCount: Int = 0
-//  Коллекция карточек. сюда будет загружаться в дальнейшем коллекции из памяти
+    //  Коллекция карточек. сюда будет загружаться в дальнейшем коллекции из памяти
     private var cardCollection16: [ImageModel] = []
     private var cardCollection36: [ImageModel] = []
     private var currentCardCollection: [ImageModel] = []
-//  Кнопка для запуска игры
+    //  Кнопка для запуска игры
     private  let gameButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("GAME", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.addTarget(self, action: #selector(loadGame), for: .touchDown)
-        button.backgroundColor = .lightGray
-        button.layer.cornerRadius = 15
-        button.alpha = 0.85
-        button.layer.borderColor = UIColor.gray.cgColor
-        button.layer.borderWidth = 3
+        let button = ButtonBuilder().set(selector: #selector(loadGame))
+            .set(title: "GAME")
+            .build()
         return button
     }()
-//  Кнопка, по которой задается 16 карточек
+    //  Кнопка, по которой задается 16 карточек
     private let easyLVLButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("16", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.addTarget(self, action: #selector(tapEasyButton), for: .touchDown)
-        button.layer.cornerRadius = 15
-        button.backgroundColor = .lightGray
-        button.alpha = 0.85
-        button.layer.borderColor = UIColor.gray.cgColor
-        button.layer.borderWidth = 3
+        let button = ButtonBuilder().set(selector: #selector(tapEasyButton))
+            .set(title: "16")
+            .build()
         return button
     }()
-//  Кнопка, по которой задается 32 карточки
+    //  Кнопка, по которой задается 32 карточки
     private let hardLVLButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("36", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.addTarget(self, action: #selector(tapHardButton), for: .touchDown)
-        button.backgroundColor = .lightGray
-        button.layer.cornerRadius = 15
-        button.alpha = 0.85
-        button.layer.borderColor = UIColor.gray.cgColor
-        button.layer.borderWidth = 3
+        let button = ButtonBuilder().set(selector: #selector(tapHardButton))
+            .set(title: "36")
+            .build()
         return button
     }()
     
     private let collectionButton: UIButton = {
         let button = UIButton()
-        button.setTitleColor(.black, for: .normal)
         button.addTarget(self, action: #selector(chooseCardCollection), for: .touchDown)
         button.backgroundColor = .clear
         button.layer.cornerRadius = 15
         return button
     }()
-//  текст на экране, призывающий выбрать сложность
+    //  текст на экране, призывающий выбрать сложность
     private let text: UITextView = {
         let text = UITextView()
         text.isUserInteractionEnabled = false
@@ -84,7 +65,7 @@ class FPMainMenuViewController: UIViewController, UpdateCardCollection {
         return text
     }()
     
-//  здесь в дальнейшем будет отображена одна из картинок выбранной коллекции
+    //  здесь в дальнейшем будет отображена одна из картинок выбранной коллекции
     private let mainImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage()
@@ -93,17 +74,17 @@ class FPMainMenuViewController: UIViewController, UpdateCardCollection {
         return imageView
     }()
     
-//  устанавливаем расположение наших кнопок и картинки
+    //  устанавливаем расположение наших кнопок и картинки
     override func viewDidLoad() {
         super.viewDidLoad()
         let height = view.frame.height
         let width = view.frame.width
-         let heightButton = height/8
+        let heightButton = height/8
         let widthLVLButton = width/45*14
         let widthGameButton = width/3*2
         let deltaBetweenButton = (13/16 - 1/45 - 1/8) * height
         cardCount = 16
-        easyLVLButton.backgroundColor = .darkGray
+        changeButton()
         makeBaseCardCollection()
         
         gameButton.frame = CGRect(x: width/6, y: height/16*13, width: widthGameButton, height: heightButton)
@@ -112,14 +93,13 @@ class FPMainMenuViewController: UIViewController, UpdateCardCollection {
         mainImageView.frame = CGRect(x: width/6, y: height/8, width: widthGameButton, height: height/16*7)
         text.frame = CGRect(x: width/6, y: height/12*7, width: widthGameButton, height: heightButton/2)
         
-        
         collectionButton.frame = mainImageView.frame
     }
     
-//  добавляем кнопки и картинки на view
+    //  добавляем кнопки и картинки на view
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-       
+        
         view.backgroundColor = .cyan
         view.addSubview(gameButton)
         view.addSubview(easyLVLButton)
@@ -128,47 +108,47 @@ class FPMainMenuViewController: UIViewController, UpdateCardCollection {
         view.addSubview(text)
         view.addSubview(collectionButton)
     }
-  
-//    функция относится к кнопке и переключает количество карточек на нужное нам число
+    
+    //    функция относится к кнопке и переключает количество карточек на нужное нам число
     @objc private func tapEasyButton() {
-        easyLVLButton.backgroundColor = .darkGray
-        hardLVLButton.backgroundColor = .lightGray
+        cardCount = 16
+        changeButton()
         currentCardCollection = cardCollection16
         mainImageView.image = currentCardCollection[0].image
     }
-//    функция относится к кнопке и переключает количество карточек на нужное нам число
+    //    функция относится к кнопке и переключает количество карточек на нужное нам число
     @objc private func tapHardButton() {
-        easyLVLButton.backgroundColor = .lightGray
-        hardLVLButton.backgroundColor = .darkGray
+        cardCount = 36
+        changeButton()
         currentCardCollection = cardCollection36
         mainImageView.image = currentCardCollection[0].image
     }
-//  функция относится к кнопке, запускающей игру. На данном этапе в ней формируется коллекция, настраиваются параметры для следующего viewController'a и загружается следующий экран
+    //  функция относится к кнопке, запускающей игру. На данном этапе в ней формируется коллекция, настраиваются параметры для следующего viewController'a и загружается следующий экран
     @objc private func loadGame() {
-//        makeCardCollection()
         if currentCardCollection.count == 0 {
             print("Коллекция пуста")
         } 
-        let gameMenu = FPGameMenuViewController()
+        let gameMenu = GameMenuViewController()
         gameMenu.cardCollection = currentCardCollection
         navigationController?.pushViewController(gameMenu, animated: true)
     }
     
     @objc private func chooseCardCollection() {
-        let collectionViewController = FPChooseCollectionViewController()
+        let collectionViewController = ChooseCollectionViewController()
         collectionViewController.changeCardCollection = self
         navigationController?.pushViewController(collectionViewController, animated: true)
     }
-// функция, создающая коллекцию. Т.к. по логике игры у нас четное количество карточек, то мы смело делим на 2 (игра по отысканию пар) и заполняем коллекцию карточками и их копиями
+    // функция, создающая коллекцию. Т.к. по логике игры у нас четное количество карточек, то мы смело делим на 2 (игра по отысканию пар) и заполняем коллекцию карточками и их копиями
     private func makeCardCollection(collection: [ImageModel])-> [ImageModel]{
-        cardCount = collection.count
+        cardCount = collection.count * 2
+        changeButton()
         var newCollection = [ImageModel]()
         
-        for i in 0..<cardCount {
+        for i in 0..<collection.count {
             newCollection.append(collection[i])
             newCollection.append(collection[i])
         }
-        
+        currentCardCollection = newCollection
         return newCollection
     }
     
@@ -193,6 +173,24 @@ class FPMainMenuViewController: UIViewController, UpdateCardCollection {
         mainImageView.image = currentCardCollection[0].image
     }
     
+    private func changeButton(){
+        switch cardCount {
+        case 16:
+            do {
+                easyLVLButton.backgroundColor = .darkGray
+                hardLVLButton.backgroundColor = .lightGray
+            }
+        case 36:
+            do {
+                easyLVLButton.backgroundColor = .lightGray
+                hardLVLButton.backgroundColor = .darkGray
+            }
+        default:
+            print("error")
+        }
+    }
+    
+    //    MARK: -UpdateCardCollection
     
     func udpateCardCollection(newCardCollection: [ImageModel]){
         mainImageView.image = newCardCollection[0].image

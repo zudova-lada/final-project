@@ -1,5 +1,5 @@
 //
-//  FPChooseCollectionViewController.swift
+//  ChooseCollectionViewController.swift
 //  FinalProject
 //
 //  Created by Лада on 05/12/2019.
@@ -12,62 +12,39 @@ protocol AddNewCollection {
     func addCollection(newCollection:[ImageModel])
 }
 
-
-//coreData сюда необходимо подгружать!!!!!!!!
-
-class FPChooseCollectionViewController: UIViewController, AddNewCollection {
+final class ChooseCollectionViewController: UIViewController{
     
     var changeCardCollection: UpdateCardCollection!
     
-    private let coreDataManager = FPCoreDataManager()
+    private let coreDataManagerCollection = CoreDataManagerCollection()
     private var cardCollectionView: UICollectionView!
-    private let dataSource = FPChooseCollectionDataSource()
-    private let delegate = FPChooseCollectionDelegate()
+    private let dataSource = ChooseCollectionDataSource()
+    private let delegate = ChooseCollectionDelegate()
     private let layout = UICollectionViewFlowLayout()
     private var dataForView16 = [ImagesModel]()
     private var dataForView36 = [ImagesModel]()
-    
-    let namesCollections = FPCoreDataNames()
-    
-    
-//    private var cardCollection16:[[ImageModel]] = []
-//    private var cardCollectionData: [[ImageStructure]] = []
+    private let namesCollections = CoreDataManagerNames()
     private var cardCount = 16
     
     //  Кнопка, по которой задается 16 карточек
     let easyLVLButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("16", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.addTarget(self, action: #selector(tapEasyButton), for: .touchDown)
-        button.backgroundColor = .lightGray
-        button.alpha = 0.85
-        button.layer.borderColor = UIColor.gray.cgColor
-        button.layer.cornerRadius = 15
+        let button = ButtonBuilder().set(selector: #selector(tapEasyButton))
+            .set(title: "16")
+            .build()
         return button
     }()
     //  Кнопка, по которой задается 32 карточки
     let hardLVLButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("36", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.addTarget(self, action: #selector(tapHardButton), for: .touchDown)
-        button.backgroundColor = .lightGray
-        button.alpha = 0.85
-        button.layer.borderColor = UIColor.gray.cgColor
-        button.layer.cornerRadius = 15
+        let button = ButtonBuilder().set(selector: #selector(tapHardButton))
+            .set(title: "36")
+            .build()
         return button
     }()
     
     let chooseButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Выбрать", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.addTarget(self, action: #selector(chooseCollectionButton), for: .touchDown)
-        button.backgroundColor = .lightGray
-        button.alpha = 0.85
-        button.layer.borderColor = UIColor.gray.cgColor
-        button.layer.cornerRadius = 15
+        let button = ButtonBuilder().set(selector: #selector(chooseCollectionButton))
+            .set(title: "Выбрать")
+            .build()
         return button
     }()
     
@@ -89,18 +66,18 @@ class FPChooseCollectionViewController: UIViewController, AddNewCollection {
         
         namesCollections.createPersistentContainer()
         dataForView16 = namesCollections.fetchData16()
-//        namesCollections.deleteAllElements()
+        //        namesCollections.deleteAllElements()
         DispatchQueue.global().async {
             self.dataForView36 = self.namesCollections.fetchData36()
         }
-        coreDataManager.createPersistentContainer()
-//        coreDataManager.deleteAllElements()
+        coreDataManagerCollection.createPersistentContainer()
+        //        CoreDataManagerCollection.deleteAllElements()
         layout.itemSize = CGSize(width: view.frame.width, height: 700)
         layout.scrollDirection = .horizontal
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
         cardCollectionView =  UICollectionView(frame: CGRect(x: 0, y: self.view.frame.height/19*7, width: self.view.frame.width, height: self.view.frame.height/3), collectionViewLayout: layout)
-        cardCollectionView.register(FPChooseCollectionViewCell.self, forCellWithReuseIdentifier: "CollectionCell")
+        cardCollectionView.register(ChooseCollectionViewCell.self, forCellWithReuseIdentifier: "CollectionCell")
         dataSource.cardCollection = dataForView16
         cardCollectionView.dataSource = dataSource
         cardCollectionView.delegate = delegate
@@ -134,13 +111,13 @@ class FPChooseCollectionViewController: UIViewController, AddNewCollection {
     
     //    функция относится к кнопке и переключает количество карточек на нужное нам число
     @objc private func tapEasyButton() {
-
+        
         cardCount = 16
         dataSource.cardCollection = dataForView16
         easyLVLButton.backgroundColor = .gray
         hardLVLButton.backgroundColor = .lightGray
         cardCollectionView.reloadData()
-
+        
     }
     
     //    функция относится к кнопке и переключает количество карточек на нужное нам число
@@ -153,14 +130,14 @@ class FPChooseCollectionViewController: UIViewController, AddNewCollection {
     }
     
     
-
+    
     @objc private func chooseCollectionButton() {
-
+        
         let centerPoint = CGPoint(x: cardCollectionView.bounds.origin.x + cardCollectionView.bounds.size.width/2, y:  cardCollectionView.bounds.origin.y + cardCollectionView.bounds.size.height/2)
         if let centerIndexPath: IndexPath  = cardCollectionView.indexPathForItem(at: centerPoint) {
             let name = dataSource.cardCollection[centerIndexPath.row].name
             DispatchQueue.global().async {
-                let data = self.coreDataManager.fetchData(nameCollection: name, collectionCount: self.cardCount)
+                let data = self.coreDataManagerCollection.fetchData(nameCollection: name, collectionCount: self.cardCount)
                 
                 DispatchQueue.main.async {
                     self.changeCardCollection.udpateCardCollection(newCardCollection: data)
@@ -173,16 +150,21 @@ class FPChooseCollectionViewController: UIViewController, AddNewCollection {
         navigationController?.popViewController(animated: true)
         
     }
-
-    @objc func addNewCollectionButton() {
-        let addNewCollectionController = FPAddCollectionVIewController()
+    
+    @objc private func addNewCollectionButton() {
+        let addNewCollectionController = AddCollectionVIewController()
         addNewCollectionController.cardCount = cardCount
         addNewCollectionController.collectionForAdding = self
         navigationController?.pushViewController(addNewCollectionController, animated: true)
     }
     
-    func addCollection(newCollection:[ImageModel]) {
+}
 
+extension ChooseCollectionViewController: AddNewCollection {
+    
+    //    MARK: -AddNewCollection
+    func addCollection(newCollection:[ImageModel]) {
+        
         let collectionName = String(dataSource.cardCollection.count) + String(newCollection.count)
         var images = [UIImage]()
         
@@ -195,8 +177,6 @@ class FPChooseCollectionViewController: UIViewController, AddNewCollection {
         self.dataSource.cardCollection.append(model)
         self.cardCollectionView.reloadData()
         
-        
-//        Нужно ли?
         switch newCollection.count {
         case 8:
             dataForView16.append(model)
@@ -204,7 +184,7 @@ class FPChooseCollectionViewController: UIViewController, AddNewCollection {
             dataForView36.append(model)
         default: do {}
         }
-
+        
         DispatchQueue.global().async {
             let savingName = CollectionHelper(context: self.namesCollections.context)
             savingName.collectionName = collectionName
@@ -214,20 +194,22 @@ class FPChooseCollectionViewController: UIViewController, AddNewCollection {
             savingName.image4 = NSData(data: images[3].pngData()!) as NSData
             savingName.count = String(newCollection.count)
             
-            
             self.namesCollections.saveContext()
             
         }
         
+        let saveMessage = UIAlertController(title: "Save", message: "Идет сохранение изображений в базу данных, пожалуйста, подождите", preferredStyle: .alert)
+        self.present(saveMessage, animated: true)
+        
         DispatchQueue.global().async {
-//            вот тут может быть ай-ай-ай
-            self.coreDataManager.saveContext(imageCollection: newCollection, collectionName: collectionName)
-       
+            self.coreDataManagerCollection.saveContext(imageCollection: newCollection, collectionName: collectionName) { result in
+                if result {
+                    saveMessage.dismiss(animated: true, completion: nil)
+                }
+            }
+            
         }
-    
-
         
     }
     
-
 }

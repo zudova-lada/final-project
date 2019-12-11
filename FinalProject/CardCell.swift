@@ -1,5 +1,5 @@
 //
-//  FPCardCell.swift
+//  CardCell.swift
 //  FinalProject
 //
 //  Created by Лада on 27/11/2019.
@@ -8,10 +8,10 @@
 
 import UIKit
 
-class FPCardCell: UICollectionViewCell {
-
+final class CardCell: UICollectionViewCell {
     
-//    создано для тестирования, чтобы не искать одинаковые карточки
+    
+    //    создано для тестирования, чтобы не искать одинаковые карточки
     let textLabel: UILabel = {
         let label = UILabel()
         label.text = "Hello"
@@ -32,20 +32,10 @@ class FPCardCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        if textLabel.text == "" {
-            cardImageView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
-//            cardImageView.image = UIImage(named: "18")
-//            cardShit = cardImageView.image!
-            contentView.addSubview(cardImageView)
-        } else {
-            cardImageView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height * 7/8)
-//            cardImageView.image = UIImage(named: "18")
-//            cardShit = cardImageView.image!
-            textLabel.frame = CGRect(x: 0, y: 0, width: frame.width * 7/8, height: frame.height * 1/8)
-            contentView.backgroundColor = .yellow
-            contentView.addSubview(textLabel)
-            contentView.addSubview(cardImageView)
-        }
+        cardImageView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
+        contentView.backgroundColor = .yellow
+        contentView.addSubview(cardImageView)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -66,5 +56,5 @@ class FPCardCell: UICollectionViewCell {
         cardImageView.image = UIImage()
         
     }
-
+    
 }
