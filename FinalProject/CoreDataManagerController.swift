@@ -15,20 +15,23 @@ final class CoreDataManagerCollection {
     var context: NSManagedObjectContext!
     var lists = [ImageStructure]()
     let request: NSFetchRequest<ImageStructure> = ImageStructure.fetchRequest()
+    let container = NSPersistentContainer(name: "CardCollection")
     
     func createPersistentContainer() {
-        let container = NSPersistentContainer(name: "CardCollection")
         container.loadPersistentStores(completionHandler: { (images, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
         
-        context = container.viewContext
     }
     
     func saveContext(imageCollection:  [ImageModel], collectionName: String, completion:((Bool)->(Void))?) {
+        
+        context = container.viewContext
+        
         for item in imageCollection {
+            
             let savingImage = ImageStructure(context: context)
             let imageToData = item.image.pngData()
             savingImage.name = item.name
@@ -47,6 +50,7 @@ final class CoreDataManagerCollection {
     }
     
     func deleteAllElements () {
+        context = container.viewContext
         do {
             request.predicate = nil
             lists = try context.fetch(request)
@@ -69,7 +73,8 @@ final class CoreDataManagerCollection {
     }
     
     func fetchData(nameCollection: String, collectionCount: Int)-> [ImageModel]{
-        print("Fetching Data..")
+        
+        context = container.viewContext
         
         do {
             request.fetchLimit = collectionCount
@@ -90,4 +95,5 @@ final class CoreDataManagerCollection {
         
         return collectionCard
     }
+    
 }

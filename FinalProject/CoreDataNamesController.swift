@@ -15,9 +15,10 @@ final class CoreDataManagerNames {
     var collectionNames16 = [CollectionHelper]()
     var collectionNames36 = [CollectionHelper]()
     let request: NSFetchRequest<CollectionHelper> = CollectionHelper.fetchRequest()
+    let container = NSPersistentContainer(name: "CollectionNames")
     
     func createPersistentContainer() {
-        let container = NSPersistentContainer(name: "CollectionNames")
+        //        let container = NSPersistentContainer(name: "CollectionNames")
         container.loadPersistentStores(completionHandler: { (images, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
@@ -39,6 +40,7 @@ final class CoreDataManagerNames {
     }
     
     func deleteAllElements () {
+        context = container.viewContext
         request.predicate =  nil
         
         do {
@@ -71,8 +73,7 @@ final class CoreDataManagerNames {
     }
     
     func fetchData16()-> [ImagesModel]{
-        print("Fetching Data..")
-        
+        context = container.viewContext
         do {
             request.predicate = NSPredicate(format: "count == %@", "8")
             collectionNames16 = try context.fetch(request)
@@ -97,7 +98,7 @@ final class CoreDataManagerNames {
     }
     
     func fetchData36()-> [ImagesModel]{
-        print("Fetching Data..")
+        context = container.viewContext
         
         do {
             

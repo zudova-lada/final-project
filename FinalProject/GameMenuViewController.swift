@@ -18,6 +18,7 @@ protocol UpdateGamePoints {
 final class GameMenuViewController: UIViewController, UpdateGamePoints {
     
     var cardCollection: [ImageModel]!
+    //    var gameMenuModel: GameModelInput!
     
     private var cardCollectionView: UICollectionView!
     private let dataSource = CardsCollectionViewDataSource()
@@ -88,7 +89,8 @@ final class GameMenuViewController: UIViewController, UpdateGamePoints {
             }
             
         default:
-            print("Такого игрока нет")
+            errorMessage(error: "Такого игрока нет")
+            
         }
         // когда количество карточек доходит до 0, тогда и количество очков становится 0
         // и появляется сообщение об окончании игры, а так же выдаются результаты игры
@@ -169,4 +171,10 @@ final class GameMenuViewController: UIViewController, UpdateGamePoints {
         text.layer.cornerRadius = 15
         return text
     }()
+    
+    func errorMessage(error: String){
+        let errorMessage = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+        errorMessage.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
+        self.present(errorMessage, animated: true)
+    }
 }

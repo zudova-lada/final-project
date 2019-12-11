@@ -12,16 +12,18 @@ protocol UpdateCardCollection {
     func udpateCardCollection(newCardCollection: [ImageModel])
 }
 
+protocol MainMenuInput {
+    func errorMessage(errorMessage: String)
+}
+
 
 //  Главное меню игры, здесь выбираются основные параметры: количество карточек и коллекция (в будущем)
 //
-final class MainMenuViewController: UIViewController, UpdateCardCollection {
-    //  По умолчанию стоит 16 карточек для игры
-    private var cardCount: Int = 0
-    //  Коллекция карточек. сюда будет загружаться в дальнейшем коллекции из памяти
-    private var cardCollection16: [ImageModel] = []
-    private var cardCollection36: [ImageModel] = []
-    private var currentCardCollection: [ImageModel] = []
+final class MainMenuViewController: UIViewController, MainMenuInput {
+    
+    var gameModel:MainMenuOutput!
+    var collectionViewController: ChooseCollectionViewController!
+    
     //  Кнопка для запуска игры
     private  let gameButton: UIButton = {
         let button = ButtonBuilder().set(selector: #selector(loadGame))
@@ -83,9 +85,9 @@ final class MainMenuViewController: UIViewController, UpdateCardCollection {
         let widthLVLButton = width/45*14
         let widthGameButton = width/3*2
         let deltaBetweenButton = (13/16 - 1/45 - 1/8) * height
-        cardCount = 16
         changeButton()
-        makeBaseCardCollection()
+        
+        mainImageView.image = gameModel.giveCurrentCollectionImage()
         
         gameButton.frame = CGRect(x: width/6, y: height/16*13, width: widthGameButton, height: heightButton)
         easyLVLButton.frame = CGRect(x: width/6, y: deltaBetweenButton, width:  widthLVLButton, height: heightButton)
@@ -111,69 +113,32 @@ final class MainMenuViewController: UIViewController, UpdateCardCollection {
     
     //    функция относится к кнопке и переключает количество карточек на нужное нам число
     @objc private func tapEasyButton() {
-        cardCount = 16
+        gameModel.changeCardCount(cardCount: 16)
         changeButton()
-        currentCardCollection = cardCollection16
-        mainImageView.image = currentCardCollection[0].image
+        mainImageView.image = gameModel.giveCurrentCollectionImage()
     }
     //    функция относится к кнопке и переключает количество карточек на нужное нам число
     @objc private func tapHardButton() {
-        cardCount = 36
+        gameModel.changeCardCount(cardCount: 36)
         changeButton()
-        currentCardCollection = cardCollection36
-        mainImageView.image = currentCardCollection[0].image
+        mainImageView.image = gameModel.giveCurrentCollectionImage()
     }
-    //  функция относится к кнопке, запускающей игру. На данном этапе в ней формируется коллекция, настраиваются параметры для следующего viewController'a и загружается следующий экран
+    
     @objc private func loadGame() {
-        if currentCardCollection.count == 0 {
-            print("Коллекция пуста")
-        } 
         let gameMenu = GameMenuViewController()
-        gameMenu.cardCollection = currentCardCollection
+        gameMenu.cardCollection = gameModel.giveCurrentCardCollection()
         navigationController?.pushViewController(gameMenu, animated: true)
     }
     
     @objc private func chooseCardCollection() {
-        let collectionViewController = ChooseCollectionViewController()
-        collectionViewController.changeCardCollection = self
+        
         navigationController?.pushViewController(collectionViewController, animated: true)
-    }
-    // функция, создающая коллекцию. Т.к. по логике игры у нас четное количество карточек, то мы смело делим на 2 (игра по отысканию пар) и заполняем коллекцию карточками и их копиями
-    private func makeCardCollection(collection: [ImageModel])-> [ImageModel]{
-        cardCount = collection.count * 2
-        changeButton()
-        var newCollection = [ImageModel]()
-        
-        for i in 0..<collection.count {
-            newCollection.append(collection[i])
-            newCollection.append(collection[i])
-        }
-        currentCardCollection = newCollection
-        return newCollection
-    }
-    
-    private func makeBaseCardCollection() {
-        cardCollection16 = []
-        cardCollection36 = []
-        
-        for i in 0..<8 {
-            let image = UIImage(named: String(i))
-            let imageModel = ImageModel(name: String(i), image: image!)
-            cardCollection16.append(imageModel)
-            cardCollection16.append(imageModel)
-        }
-        
-        for i in 0..<18 {
-            let image = UIImage(named: String(i))
-            let imageModel = ImageModel(name: String(i), image: image!)
-            cardCollection36.append(imageModel)
-            cardCollection36.append(imageModel)
-        }
-        currentCardCollection = cardCollection16
-        mainImageView.image = currentCardCollection[0].image
     }
     
     private func changeButton(){
+        
+        let cardCount = gameModel.currectCardCount()
+        
         switch cardCount {
         case 16:
             do {
@@ -186,26 +151,16 @@ final class MainMenuViewController: UIViewController, UpdateCardCollection {
                 hardLVLButton.backgroundColor = .darkGray
             }
         default:
-            print("error")
+            errorMessage(errorMessage: "Ошибка в количестве карточек")
         }
     }
     
-    //    MARK: -UpdateCardCollection
-    
-    func udpateCardCollection(newCardCollection: [ImageModel]){
-        mainImageView.image = newCardCollection[0].image
-        switch newCardCollection.count {
-        case 8:
-            do {
-                cardCollection16 = makeCardCollection(collection: newCardCollection)
-            }
-        case 18:
-            do {
-                cardCollection36 = makeCardCollection(collection: newCardCollection)
-            }
-        default:
-            print("Ошибка в количестве карточек")
-        }
+    //    MARK: MainMenuInput
+    func errorMessage(errorMessage: String) {
+        let errorMessage = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
+        errorMessage.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
+        self.present(errorMessage, animated: true)
     }
+    
 }
 

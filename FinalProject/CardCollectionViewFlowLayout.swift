@@ -31,24 +31,28 @@ final class CardCollectionViewFlowLayout: UICollectionViewFlowLayout {
     }
     
     override func prepare() {
-        var cardCount = collectionView!.numberOfItems(inSection: 0)
+        let cardCount = collectionView!.numberOfItems(inSection: 0)
         layoutAttributes = []
-        
-        //        !!!!!!!!!! определим количество столбцов !!!! т.к. у нас можно извлечь целый квадратный корень, то ячейки не сместятся, но если играть с количеством, некоторые ячейки могут пропасть из видимого экрана
         
         guard  let collectionView = collectionView else {
             return
         }
         
         switch cardCount {
+        case 16:
+            numberOfColumns = 4
+        case 36:
+            numberOfColumns = 6
         case 8:
-            cardCount = 16
+            numberOfColumns = 4
         case 18:
-            cardCount = 36
+            numberOfColumns = 6
         default:
-            print("Error")
+            
+            print("error")
         }
-        numberOfColumns = Int(sqrt(Double(cardCount)))
+        
+        //        numberOfColumns = Int(sqrt(Double(cardCount)))
         
         // Задаем значения ширины и отступов
         let columnWidth = contentWidth / CGFloat(numberOfColumns)
@@ -99,5 +103,6 @@ final class CardCollectionViewFlowLayout: UICollectionViewFlowLayout {
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         return layoutAttributes[indexPath.item]
     }
+    
     
 }

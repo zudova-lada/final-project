@@ -23,10 +23,6 @@ final class ChooseCollectionDelegate: NSObject, UICollectionViewDelegateFlowLayo
         return UIEdgeInsets(top: 0.0, left:length , bottom: 0.0, right: length)
     }
     
-    func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
-        print("hello")
-        return true
-    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 5

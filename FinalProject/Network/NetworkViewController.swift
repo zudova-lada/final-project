@@ -41,7 +41,7 @@ final class NetworkViewController: UIViewController, Mediator {
     private var searchString: String  = ""
     private var tableDelegate = TableDelegate()
     private var searchComponent = NetworkSearchBarDelegate()
-
+    
     init(interactor: InteractorInput) {
         self.interactor = interactor
         super.init(nibName: nil, bundle: nil)
@@ -54,7 +54,6 @@ final class NetworkViewController: UIViewController, Mediator {
         super.viewDidLoad()
         tableView.dataSource = dataSource
         searchController = UISearchController(searchResultsController: nil)
-//        tableDelegate.selectImage = self
         tableView.delegate = tableDelegate
         tableView.tableHeaderView = searchController.searchBar
         tableView.translatesAutoresizingMaskIntoConstraints = false
